@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+
+option java_multiple_files = true;
+option java_package = "com.nompay.bank.grpc";
+option java_outer_classname = "UserAuthProto";
+
+service UserAuthenticator {
+  rpc createUserAuth (UserAuthRequest) returns (UserAuthResponse);
+  rpc deleteUserAUth (DeleteUserAuthRequest) returns (DeleteUserAuthResponse);
+}
+
+message UserAuthRequest {
+  string userId = 1;
+  string email = 2;
+}
+
+message UserAuthResponse {
+  string id = 1;
+  string userId = 2;
+  string email = 3;
+  bool isAuthenticated = 4;
+}
+
+// Delete User Auth
+message DeleteUserAuthRequest {
+  string userId = 1;
+}
+
+message DeleteUserAuthResponse {
+  string msg = 1;
+}
