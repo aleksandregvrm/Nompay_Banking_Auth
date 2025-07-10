@@ -13,7 +13,7 @@ version = "0.0.1-SNAPSHOT"
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
+		languageVersion = JavaLanguageVersion.of(23)
 	}
 }
 
@@ -27,7 +27,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("io.grpc:grpc-services")
+	implementation("io.grpc:grpc-services:1.63.0")
 	implementation("org.springframework.grpc:spring-grpc-server-web-spring-boot-starter")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("com.mysql:mysql-connector-j:8.3.0")
