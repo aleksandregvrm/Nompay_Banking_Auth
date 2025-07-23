@@ -1,11 +1,13 @@
 package com.nompay.bank.solutions.authorizationService.controllers;
 
 import com.nompay.bank.grpc.*;
-import com.nompay.bank.solutions.authorizationService.repositories.dto.UserAuth;
+import com.nompay.bank.solutions.authorizationService.repositories.entities.AuthenticatedUsersEntity;
 import com.nompay.bank.solutions.authorizationService.services.impl.UserAuthServiceImpl;
 import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 import org.springframework.grpc.server.service.GrpcService;
+
+import static java.lang.System.out;
 
 @GrpcService
 public class UserAuthController extends UserAuthenticatorGrpc.UserAuthenticatorImplBase {
@@ -20,15 +22,15 @@ public class UserAuthController extends UserAuthenticatorGrpc.UserAuthenticatorI
       UserAuthRequest request,
       StreamObserver<UserAuthResponse> responseObserver
   ) {
-    UserAuth auth = authService.save(request.getUserId(), request.getEmail());
-
+    out.println("it has reached in here...");
+//    AuthenticatedUsersEntity auth = authService.save(request.getUserId(), request.getEmail());
     UserAuthResponse reply = UserAuthResponse.newBuilder()
-        .setId(auth.id())
-        .setUserId(auth.userId())
-        .setEmail(auth.email())
-        .setIsAuthenticated(auth.isAuthenticated())
+        .setId("1231231123")
+        .setUserId("12312312")
+        .setEmail("chukula@com.com")
+        .setIsAuthenticated(true)
         .build();
-
+    out.println(reply);
     responseObserver.onNext(reply);
     responseObserver.onCompleted();
   }

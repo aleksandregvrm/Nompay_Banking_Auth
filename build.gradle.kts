@@ -30,6 +30,7 @@ dependencies {
 	implementation("io.grpc:grpc-services:1.63.0")
 	implementation("org.springframework.grpc:spring-grpc-server-web-spring-boot-starter")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("jakarta.validation:jakarta.validation-api:3.0.2")
 	implementation("com.mysql:mysql-connector-j:8.3.0")
 	implementation("org.flywaydb:flyway-core:9.21.1")
 	implementation("org.flywaydb:flyway-mysql:9.21.1")

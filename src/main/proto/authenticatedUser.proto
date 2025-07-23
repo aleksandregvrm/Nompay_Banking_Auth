@@ -11,8 +11,8 @@ service UserAuthenticator {
 }
 
 message UserAuthRequest {
-  string userId = 1;
-  string email = 2;
+  string email = 1;
+  string userId = 2;
 }
 
 message UserAuthResponse {
@@ -24,7 +24,7 @@ message UserAuthResponse {
 
 // Delete User Auth
 message DeleteUserAuthRequest {
-  string userId = 1;
+  int64 userId = 1;
 }
 
 message DeleteUserAuthResponse {

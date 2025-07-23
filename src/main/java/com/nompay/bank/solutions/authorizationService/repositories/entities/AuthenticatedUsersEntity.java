@@ -12,7 +12,8 @@ import java.util.Date;
 public class AuthenticatedUsersEntity {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", updatable = false, nullable = false)
   private Long id;
 
   @Column
@@ -71,5 +72,18 @@ public class AuthenticatedUsersEntity {
 
   public void setUpdateDate(Date updateDate) {
     this.updateDate = updateDate;
+  }
+
+
+  @Override
+  public String toString() {
+    return "AuthenticatedUsersEntity{" +
+        "id=" + id +
+        ", userId=" + userId +
+        ", email='" + email + '\'' +
+        ", isAuthenticated=" + isAuthenticated +
+        ", createDate=" + createDate +
+        ", updateDate=" + updateDate +
+        '}';
   }
 }
