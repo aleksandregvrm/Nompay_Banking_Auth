@@ -1,9 +1,8 @@
 package com.nompay.bank.solutions.authorizationService.repositories.entities;
 
-
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.util.Date; // Using java.util.Date for TemporalType.TIMESTAMP
 
 @Entity
 @Table(
@@ -12,27 +11,50 @@ import java.util.Date;
 public class AuthenticatedUsersEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incrementing primary key
   @Column(name = "id", updatable = false, nullable = false)
   private Long id;
 
-  @Column
+  @Column(name = "user_id", nullable = false, unique = true) // Assuming userId should be unique and not null
   private Long userId;
 
-  @Column
+  @Column(name = "email", nullable = false, unique = true) // Assuming email should be unique and not null
   private String email;
 
-  @Column
+  @Column(name = "is_authenticated", nullable = false) // Explicit column name
   private boolean isAuthenticated;
 
-  @Column(name = "create_date", updatable = false)
+  @Column(name = "create_date", updatable = false, nullable = false)
   @Temporal(TemporalType.TIMESTAMP)
   private Date createDate;
 
-  @Column(name = "update_date")
+  @Column(name = "update_date", nullable = false)
   @Temporal(TemporalType.TIMESTAMP)
   private Date updateDate;
 
+  // --- Constructors ---
+  public AuthenticatedUsersEntity() {
+    // Default constructor
+  }
+
+  // --- Lifecycle Callbacks for Dates ---
+  @PrePersist
+  protected void onCreate() {
+    createDate = new Date();
+    updateDate = new Date();
+  }
+
+  @PreUpdate
+  protected void onUpdate() {
+    updateDate = new Date();
+  }
+
+  // --- Getters and Setters ---
+  public Long getId() {
+    return id;
+  }
+
+  // No setId() for auto-generated ID
 
   public Long getUserId() {
     return userId;
@@ -50,11 +72,11 @@ public class AuthenticatedUsersEntity {
     this.email = email;
   }
 
-  public boolean isAuthenticated() {
+  public boolean getIsAuthenticated() { // Changed to getIsAuthenticated for boolean property convention
     return isAuthenticated;
   }
 
-  public void setAuthenticated(boolean authenticated) {
+  public void setIsAuthenticated(boolean authenticated) { // Changed to setIsAuthenticated
     isAuthenticated = authenticated;
   }
 
@@ -62,18 +84,13 @@ public class AuthenticatedUsersEntity {
     return createDate;
   }
 
+  // No setCreateDate() as it's managed by @PrePersist
+
   public Date getUpdateDate() {
     return updateDate;
   }
 
-  public Long getId() {
-    return id;
-  }
-
-  public void setUpdateDate(Date updateDate) {
-    this.updateDate = updateDate;
-  }
-
+  // No setUpdateDate() as it's managed by @PreUpdate
 
   @Override
   public String toString() {

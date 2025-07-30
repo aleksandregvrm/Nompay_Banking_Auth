@@ -6,6 +6,7 @@ import com.nompay.bank.solutions.authorizationService.services.impl.UserAuthServ
 import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 import org.springframework.grpc.server.service.GrpcService;
+import org.springframework.transaction.annotation.Transactional;
 
 import static java.lang.System.out;
 
@@ -18,12 +19,16 @@ public class UserAuthController extends UserAuthenticatorGrpc.UserAuthenticatorI
   }
 
   @Override
+  @Transactional
   public void createUserAuth(
       UserAuthRequest request,
       StreamObserver<UserAuthResponse> responseObserver
   ) {
     out.println("it has reached in here...");
-//    AuthenticatedUsersEntity auth = authService.save(request.getUserId(), request.getEmail());
+    out.println(request.getUserId() + request.getEmail());
+    out.println(request.getUserId() + request.getEmail());
+    AuthenticatedUsersEntity auth = authService.save((long) Integer.parseInt(request.getUserId()), request.getEmail());
+    out.println("it hasn't reached in here ");
     UserAuthResponse reply = UserAuthResponse.newBuilder()
         .setId("1231231123")
         .setUserId("12312312")
@@ -36,6 +41,7 @@ public class UserAuthController extends UserAuthenticatorGrpc.UserAuthenticatorI
   }
 
   @Override
+  @Transactional
   public void deleteUserAUth(DeleteUserAuthRequest request, StreamObserver<DeleteUserAuthResponse> responseObserver) throws StatusRuntimeException {
     String deletedUserAuth = authService.delete(request.getUserId());
     DeleteUserAuthResponse reply = DeleteUserAuthResponse.newBuilder().setMsg(deletedUserAuth).build();
@@ -43,6 +49,7 @@ public class UserAuthController extends UserAuthenticatorGrpc.UserAuthenticatorI
     responseObserver.onNext(reply);
     responseObserver.onCompleted();
   }
+
 
 
 }
