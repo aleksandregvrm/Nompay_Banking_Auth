@@ -32,6 +32,12 @@ public class AuthenticatedUsersEntity {
   @Temporal(TemporalType.TIMESTAMP)
   private Date updateDate;
 
+  @OneToOne(mappedBy = "authenticatedUserId", cascade = CascadeType.ALL, orphanRemoval = true)
+  private UserSessionsEntity userSession;
+
+  @OneToOne(mappedBy = "authenticatedUserId", cascade = CascadeType.ALL, orphanRemoval = true)
+  private RoleUsersEntity userRole ;
+
   // --- Constructors ---
   public AuthenticatedUsersEntity() {
     // Default constructor

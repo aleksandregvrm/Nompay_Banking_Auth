@@ -24,18 +24,14 @@ public class UserAuthController extends UserAuthenticatorGrpc.UserAuthenticatorI
       UserAuthRequest request,
       StreamObserver<UserAuthResponse> responseObserver
   ) {
-    out.println("it has reached in here...");
-    out.println(request.getUserId() + request.getEmail());
-    out.println(request.getUserId() + request.getEmail());
+
     AuthenticatedUsersEntity auth = authService.save((long) Integer.parseInt(request.getUserId()), request.getEmail());
-    out.println("it hasn't reached in here ");
     UserAuthResponse reply = UserAuthResponse.newBuilder()
-        .setId("1231231123")
-        .setUserId("12312312")
-        .setEmail("chukula@com.com")
-        .setIsAuthenticated(true)
+        .setId(auth.getId().toString())
+        .setUserId(auth.getUserId().toString())
+        .setEmail(auth.getEmail())
+        .setIsAuthenticated(auth.getIsAuthenticated())
         .build();
-    out.println(reply);
     responseObserver.onNext(reply);
     responseObserver.onCompleted();
   }
