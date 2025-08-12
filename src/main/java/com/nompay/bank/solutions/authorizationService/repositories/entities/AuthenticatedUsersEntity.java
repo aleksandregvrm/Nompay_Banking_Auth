@@ -3,6 +3,7 @@ package com.nompay.bank.solutions.authorizationService.repositories.entities;
 import jakarta.persistence.*;
 
 import java.util.Date; // Using java.util.Date for TemporalType.TIMESTAMP
+import java.util.Optional;
 
 @Entity
 @Table(
@@ -36,7 +37,7 @@ public class AuthenticatedUsersEntity {
   private UserSessionsEntity userSession;
 
   @OneToOne(mappedBy = "authenticatedUserId", cascade = CascadeType.ALL, orphanRemoval = true)
-  private RoleUsersEntity userRole ;
+  private RoleUsersEntity userRole;
 
   // --- Constructors ---
   public AuthenticatedUsersEntity() {
@@ -108,5 +109,9 @@ public class AuthenticatedUsersEntity {
         ", createDate=" + createDate +
         ", updateDate=" + updateDate +
         '}';
+  }
+
+  public Optional<RoleUsersEntity> getUserRole() {
+    return Optional.ofNullable(userRole); // User role may not be set yet for the authenticatedUser
   }
 }

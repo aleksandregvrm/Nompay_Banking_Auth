@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+
+option java_multiple_files = true;
+option java_package = "com.nompay.bank.grpc";
+option java_outer_classname = "UserRoleProto";
+
+service UserRole {
+  rpc createUserRole (CreateUserRoleRequest) returns (CreateUserRoleResponse);
+  rpc deleteUserRole (DeleteUserRoleRequest) returns (DeleteUserRoleResponse);
+}
+
+enum UserRolesEnum {
+  USER = 0;
+  ADMIN = 1;
+}
+
+message CreateUserRoleRequest {
+  UserRolesEnum roleUser = 1;
+  string userId = 2;
+}
+
+message CreateUserRoleResponse {
+  UserRolesEnum roleUser = 1;
+  string userId = 2;
+  string id = 3;
+}
+
+message DeleteUserRoleRequest {
+  string userId = 1;
+}
+
+message DeleteUserRoleResponse {
+  string msg = 1;
+}

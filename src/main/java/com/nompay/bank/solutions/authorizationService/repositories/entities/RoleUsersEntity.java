@@ -1,6 +1,6 @@
 package com.nompay.bank.solutions.authorizationService.repositories.entities;
 
-import com.nompay.bank.solutions.authorizationService.repositories.enums.RoleUser;
+import com.nompay.bank.grpc.UserRolesEnum;
 import jakarta.persistence.*;
 
 @Entity
@@ -23,7 +23,7 @@ public class RoleUsersEntity {
 
   @Enumerated(EnumType.STRING)
   @Column(name = "authenticated_user_role", nullable = false)
-  private RoleUser role;
+  private UserRolesEnum role;
 
   public Long getId() {
     return id;
@@ -33,7 +33,7 @@ public class RoleUsersEntity {
     return authenticatedUserId;
   }
 
-  public RoleUser getRole() {
+  public UserRolesEnum getRole() {
     return role;
   }
 
@@ -41,7 +41,7 @@ public class RoleUsersEntity {
     this.authenticatedUserId = authenticatedUserId;
   }
 
-  public void setRole(RoleUser role) {
+  public void setRole(UserRolesEnum role) {
     this.role = role;
   }
 }

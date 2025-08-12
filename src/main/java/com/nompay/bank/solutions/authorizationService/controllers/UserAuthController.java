@@ -8,7 +8,6 @@ import io.grpc.stub.StreamObserver;
 import org.springframework.grpc.server.service.GrpcService;
 import org.springframework.transaction.annotation.Transactional;
 
-import static java.lang.System.out;
 
 @GrpcService
 public class UserAuthController extends UserAuthenticatorGrpc.UserAuthenticatorImplBase {
